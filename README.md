@@ -52,6 +52,11 @@ src/app/
 uvicorn app.main:app --reload --app-dir src
 ```
 
+Config CORS (backend):
+
+1. Define `CORS_ALLOWED_ORIGINS` en `.env` como lista separada por comas.
+2. Ejemplo: `CORS_ALLOWED_ORIGINS=http://127.0.0.1:5173,http://localhost:5173`
+
 ## Testing
 
 ```powershell

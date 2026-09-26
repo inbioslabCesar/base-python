@@ -1,4 +1,7 @@
+import os
+
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.application.use_cases.create_task import CreateTaskUseCase
 from app.application.use_cases.list_tasks import ListTasksUseCase
@@ -7,6 +10,25 @@ from app.infrastructure.services.uuid_generator import UuidGenerator
 from app.interfaces.http.schemas.task_schema import CreateTaskRequest, TaskResponse
 
 app = FastAPI(title="SOLID Python API", version="0.1.0")
+
+
+def _load_allowed_origins() -> list[str]:
+    raw = os.getenv(
+        "CORS_ALLOWED_ORIGINS",
+        "http://127.0.0.1:5173,http://localhost:5173",
+    )
+    return [origin.strip() for origin in raw.split(",") if origin.strip()]
+
+
+ALLOWED_ORIGINS = _load_allowed_origins()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 repository = InMemoryTaskRepository()
 id_generator = UuidGenerator()
