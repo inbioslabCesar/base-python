@@ -1,0 +1,51 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "api: run",
+      "type": "shell",
+      "command": ".\\.venv\\Scripts\\python.exe",
+      "args": [
+        "-m",
+        "uvicorn",
+        "app.main:app",
+        "--reload",
+        "--app-dir",
+        "src"
+      ],
+      "isBackground": true,
+      "group": "build"
+    },
+    {
+      "label": "test: pytest",
+      "type": "shell",
+      "command": ".\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "pytest"],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "lint: ruff",
+      "type": "shell",
+      "command": ".\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "ruff", "check", "src", "tests"],
+      "problemMatcher": []
+    },
+    {
+      "label": "types: mypy",
+      "type": "shell",
+      "command": ".\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "mypy", "src"],
+      "problemMatcher": []
+    },
+    {
+      "label": "quality: all",
+      "type": "shell",
+      "command": ".\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "pytest"],
+      "problemMatcher": [],
+      "dependsOn": ["lint: ruff", "types: mypy", "test: pytest"],
+      "dependsOrder": "sequence"
+    }
+  ]
+}
