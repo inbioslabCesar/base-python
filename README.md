@@ -18,6 +18,20 @@ Copy-Item .env.example .env
 .\.venv\Scripts\pre-commit.exe install
 ```
 
+### Crear proyecto nuevo en 1 comando
+
+Desde este repositorio puedes generar otro proyecto base asi:
+
+```powershell
+.\scripts\bootstrap-new-project.ps1 -ProjectName mi-nuevo-proyecto -DestinationRoot "C:\laragon\www"
+```
+
+Si ya tienes repo nuevo en GitHub y quieres dejarlo conectado y subirlo en un paso:
+
+```powershell
+.\scripts\bootstrap-new-project.ps1 -ProjectName mi-nuevo-proyecto -DestinationRoot "C:\laragon\www" -NewRepoUrl "https://github.com/tu-org/tu-repo.git" -PushToNewRemote
+```
+
 ### Comandos de calidad
 
 ```powershell
