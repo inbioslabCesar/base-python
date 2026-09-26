@@ -102,3 +102,17 @@ docker compose -f docker-compose.prod.yml down
 4. Lock de dependencias reproducible en [requirements.lock](requirements.lock).
 5. Contenedorizacion con [Dockerfile](Dockerfile), [docker-compose.yml](docker-compose.yml), [docker-compose.prod.yml](docker-compose.prod.yml) y [.dockerignore](.dockerignore).
 6. Hardening de produccion: contenedor no-root + healthcheck + restart policy.
+
+## Frontend base SOLID
+
+Se agrego una base frontend en [frontend](frontend) con React + TypeScript + Vite y arquitectura por capas.
+
+Comandos:
+
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+
+URL local por defecto: http://127.0.0.1:5173
